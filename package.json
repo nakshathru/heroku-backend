@@ -4,8 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "build-babel": "babel -d ./build ./src -s",
-    "build": "npm run build-babel",
+    "postinstall": "babel -d ./build ./src -s",
     "start": "node ./build/index.js"
   },
   "repository": {
