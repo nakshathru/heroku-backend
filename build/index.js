@@ -2,15 +2,76 @@
 
 var _express = _interopRequireDefault(require("express"));
 
+var _cors = _interopRequireDefault(require("cors"));
+
+var _bodyParser = _interopRequireDefault(require("body-parser"));
+
+var _mongoose = _interopRequireDefault(require("mongoose"));
+
+var _Issue = _interopRequireDefault(require("../build/Issue"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express.default)();
-app.get('/', function (req, res) {
-  res.status(200).json({
-    ' message': 'Welcome to Node.js & Express'
+
+var router = _express.default.Router();
+
+app.use((0, _cors.default)());
+app.use(_bodyParser.default.json());
+
+_mongoose.default.connect(process.env.MONGODB_URI || 'mongodb://localhost/issues', {
+  useNewUrlParser: true
+});
+
+var connection = _mongoose.default.connection;
+connection.once('open', function () {
+  console.log('MongoDB database connection established successfully!');
+});
+router.route('/issues/add').post(function (req, res) {
+  var issue = new _Issue.default(req.body);
+  issue.save().then(function (issue) {
+    res.status(200).json({
+      'issue': 'Added successfully'
+    });
+  }).catch(function (err) {
+    res.status(400).send('Failed to create new record');
   });
 });
-app.listen(process.env.PORT || 3000, function () {
-  return console.log("Listening to port 3000", process.env.PORT);
+router.route('/issues').get(function (req, res) {
+  _Issue.default.find(function (err, issues) {
+    if (err) console.log(err);else res.json(issues);
+  });
+});
+router.route('/issues/:id').get(function (req, res) {
+  _Issue.default.findById(req.params.id, function (err, issue) {
+    if (err) console.log(err);else res.json(issue);
+  });
+});
+router.route('/issues/update/:id').post(function (req, res) {
+  _Issue.default.findById(req.params.id, function (err, issue) {
+    if (!issue) return next(new Error('Could not load Document'));else {
+      issue.title = req.body.title;
+      issue.responsible = req.body.responsible;
+      issue.description = req.body.description;
+      issue.severity = req.body.severity;
+      issue.status = req.body.status;
+      issue.save().then(function (issue) {
+        res.json('Update done');
+      }).catch(function (err) {
+        res.status(400).send('Update failed');
+      });
+    }
+  });
+});
+router.route('/issues/delete/:id').get(function (req, res) {
+  _Issue.default.findByIdAndRemove({
+    _id: req.params.id
+  }, function (err, issue) {
+    if (err) res.json(err);else res.json('Removed successfully');
+  });
+});
+app.use('/', router);
+app.listen(process.env.PORT || 4000, function () {
+  return console.log("Express server running on port 4000");
 });
 //# sourceMappingURL=index.js.map
