@@ -2,10 +2,11 @@
   "name": "heroku-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-  
+    "build-babel": "babel -d ./build ./src -s",
+    "build": "npm run build-babel",
+    "start": "npm run build && node ./build/index.js"
   },
   "repository": {
     "type": "git",
@@ -17,17 +18,13 @@
     "url": "https://github.com/nakshathru/heroku-backend/issues"
   },
   "homepage": "https://github.com/nakshathru/heroku-backend#readme",
-  "devDependencies": {
+  "dependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.3",
-    "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
-    "nodemon": "^1.18.10"
+    "express": "^4.16.4"
   },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.16.4",
-    "mongoose": "^5.4.14"
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
   }
-
 }
