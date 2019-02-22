@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf build && mkdir build",
-    "build-babel": "npx babel -d ./build ./src -s",
-    "build": "npm uninstall -g babel && npm uninstall -g babel-cli &&npm install --save-dev @babel/cli &&npm run build-babel",
-    "start": "npm run build && node ./build/index.js"
+	"build": "babel -d ./build ./src -s",
+    "start": "node ./build/index.js"
   },
   "repository": {
     "type": "git",
