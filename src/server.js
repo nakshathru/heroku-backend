@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+//mongod
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
