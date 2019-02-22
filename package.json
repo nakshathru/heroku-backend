@@ -2,9 +2,9 @@
   "name": "heroku-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "src/server.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node src/server.js",
+    "start": "node server.js",
     "build": "babel src --out-dir dist",
     "serve": "nodemon --exec babel-node src/server.js"
   },
