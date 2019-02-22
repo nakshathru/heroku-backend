@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf build && mkdir build",
     "build-babel": "npx babel -d ./build ./src -s",
-    "build": "npm run clean && npm run build-babel",
+    "build": "npm uninstall -g babel && npm uninstall -g babel-cli &&npm install --save-dev @babel/cli &&npm run build-babel",
     "start": "npm run build && node ./build/index.js"
   },
   "repository": {
@@ -20,11 +20,12 @@
   },
   "homepage": "https://github.com/nakshathru/heroku-backend#readme",
   "dependencies": {
-    "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.3",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
     "express": "^4.16.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@babel/cli": "^7.2.3"
+  }
 }
