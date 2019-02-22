@@ -5,9 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "clean": "rm -rf build && mkdir build",
-    "build-babel": "babel -d ./build ./src -s",
-	"build": "npm run clean ",
-	"start": "npm run build && node ./build/index.js"
+    "build-babel": "npx babel -d ./build ./src -s",
+    "build": "npm run clean && npm run build-babel",
+    "start": "npm run build && node ./build/index.js"
   },
   "repository": {
     "type": "git",
@@ -23,8 +23,8 @@
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.3.1",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "npx": "^10.2.0"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
