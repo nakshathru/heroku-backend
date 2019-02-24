@@ -32,7 +32,7 @@ connection.once('open', function () {
 router.route('/issues').get(function (req, res) {
   _Issue.default.find().sort({
     rank: 1
-  }).limit(5).exec(function (err, issues) {
+  }).limit(50).exec(function (err, issues) {
     if (err) console.log(err);else res.json(issues);
   });
 });
@@ -52,7 +52,7 @@ router.route('/issues/:id').get(function (req, res) {
 router.route('/sort/issues/:id').get(function (req, res) {
   var sortId = req.params.id;
 
-  _Issue.default.find().sort(_defineProperty({}, sortId, 1)).limit(5).exec(function (err, issues) {
+  _Issue.default.find().sort(_defineProperty({}, sortId, 1)).limit(50).exec(function (err, issues) {
     if (err) console.log(err);else res.json(issues);
   });
 });

@@ -22,7 +22,7 @@ connection.once('open', () => {
 
 router.route('/issues').get((req, res) => {
 
-    Song.find().sort({rank: 1}).limit(5).exec( 
+    Song.find().sort({rank: 1}).limit(50).exec( 
         function(err, issues) {
 
             if (err)
@@ -51,7 +51,7 @@ router.route('/sort/issues/:id').get((req, res) => {
 
     var sortId=req.params.id;
 
-    Song.find().sort({[sortId]: 1}).limit(5).exec( 
+    Song.find().sort({[sortId]: 1}).limit(50).exec( 
         function(err, issues) {
 
             if (err)
