@@ -8,26 +8,28 @@ exports.default = void 0;
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
-var Issue = new Schema({
-  title: {
+var Song = new Schema({
+  name: {
     type: String
   },
-  responsible: {
+  artists: {
     type: String
   },
-  description: {
+  danceability: {
     type: String
   },
-  severity: {
+  energy: {
     type: String
   },
-  status: {
-    type: String,
-    default: 'Open'
+  rank: {
+    type: String
+  },
+  duration_ms: {
+    type: String
   }
 });
 
-var _default = mongoose.model('Issue', Issue);
+var _default = mongoose.model('Song', Song);
 
 exports.default = _default;
 //# sourceMappingURL=Issue.js.map

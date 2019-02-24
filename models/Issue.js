@@ -1,23 +1,28 @@
 const mongoose =require ('mongoose');
 const Schema = mongoose.Schema;
 
-let Issue = new Schema({
-    title: {
+let Song = new Schema({
+    name: {
         type: String
     },
-    responsible: {
+    artists: {
         type: String 
     },
-    description: {
+    danceability: {
         type: String
     },
-    severity: {
+    energy: {
         type: String
     },
-    status: {
-        type: String,
-        default: 'Open'
+    rank: {
+        type: String
+        
+    },
+    duration_ms:{
+        type:String
     }
+
+
 });
 
-export default mongoose.model('Issue', Issue);
+export default mongoose.model('Song', Song);
